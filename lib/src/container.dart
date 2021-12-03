@@ -7,6 +7,7 @@ enum IndicatorAlign {
   top,
   center,
   bottom,
+  bottomLeft,
 }
 
 class PageIndicatorContainer extends StatefulWidget {
@@ -84,6 +85,14 @@ class PageContainerState extends State<PageIndicatorContainer> {
         left: 0.0,
         right: 0.0,
         top: widget.padding.top,
+        height: height,
+        child: indicator,
+      );
+    }else if (align == IndicatorAlign.bottomLeft) {
+      indicator = Positioned(
+        left: 0.0,
+        right: MediaQuery.of(context).size.width * 0.7,
+        bottom: widget.padding.bottom,
         height: height,
         child: indicator,
       );

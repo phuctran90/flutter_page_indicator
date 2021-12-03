@@ -77,6 +77,15 @@ class _PageIndicatorState extends State<PageIndicator> {
         size: shape.size,
         cornerSize: shape.cornerSize,
       );
+    } else if (shape is RectangularShape) {
+      indicatorPainter = RectangularPainter(
+        color: widget.color,
+        selectedColor: widget.selectedColor,
+        count: widget.length,
+        page: page,
+        padding: widget.indicatorSpace,
+        size: shape.size,
+      );
     } else if (shape is CircleShape) {
       indicatorPainter = CirclePainter(
         color: widget.color,
@@ -101,6 +110,65 @@ class _PageIndicatorState extends State<PageIndicator> {
       ),
     );
   }
+}
+
+class RectangularPainter extends CustomPainter {
+  double page;
+  int count;
+  Color color;
+  Color selectedColor;
+  double padding;
+  late Paint _circlePaint;
+  late Paint _selectedPaint;
+  Size? size;
+
+  RectangularPainter({
+    this.page = 0.0,
+    this.count = 0,
+    this.color = Colors.white,
+    this.selectedColor = Colors.grey,
+    this.padding = 5.0,
+    this.size,
+  }) {
+    _circlePaint = Paint();
+    _circlePaint.color = color;
+
+    _selectedPaint = Paint();
+    _selectedPaint.color = selectedColor;
+
+    this.size ??= Size(12, 12);
+  }
+  double get totalWidth => count * size!.width + padding * (count - 1);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    var height = this.size!.height;
+    var width = this.size!.width;
+    var centerWidth = size.width / 2;
+    var startX = centerWidth - totalWidth / 2;
+    for (var i = 0; i < count; i++) {
+      var x = startX + i * (width + padding);
+      RRect fullRect = RRect.fromRectAndRadius(
+        Rect.fromLTWH(x, 0, 14, 2),
+        Radius.circular(1.0),
+      );
+      canvas.drawRRect(fullRect, _circlePaint);
+      // var rect = Rect.fromLTWH(x, 0, 14, 2);
+      // canvas.drawRect(rect, _circlePaint);
+    }
+
+    var selectedX = startX + page * (width + padding);
+    RRect fullRect = RRect.fromRectAndRadius(
+      Rect.fromLTWH(selectedX, 0, 14, 2),
+      Radius.circular(1.0),
+    );
+    canvas.drawRRect(fullRect, _selectedPaint);
+    // var rect = Rect.fromLTWH(selectedX, 0, 14, 2);
+    // canvas.drawRect(rect, _selectedPaint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
 
 class OvalPainter extends CustomPainter {
