@@ -88,7 +88,7 @@ class PageContainerState extends State<PageIndicatorContainer> {
         height: height,
         child: indicator,
       );
-    }else if (align == IndicatorAlign.bottomLeft) {
+    } else if (align == IndicatorAlign.bottomLeft) {
       indicator = Positioned(
         left: 0.0,
         right: MediaQuery.of(context).size.width * 0.7,

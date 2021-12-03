@@ -10,7 +10,6 @@ abstract class IndicatorShape {
   static const defaultOval = const OvalShape();
   static const defaultRectangular = const RectangularShape();
 
-
   factory IndicatorShape.circle({double size = 12.0}) {
     return CircleShape(size);
   }
@@ -36,6 +35,7 @@ abstract class IndicatorShape {
 
 class CircleShape extends IndicatorShape {
   final double size;
+
   const CircleShape(this.size) : super._();
 
   @override
@@ -63,6 +63,7 @@ class RoundRectangleShape extends IndicatorShape {
 
 class OvalShape extends IndicatorShape {
   final Size size;
+
   const OvalShape({
     this.size = const Size(12, 4),
   }) : super._();
@@ -76,6 +77,7 @@ class OvalShape extends IndicatorShape {
 
 class RectangularShape extends IndicatorShape {
   final Size size;
+
   const RectangularShape({
     this.size = const Size(12, 4),
   }) : super._();
@@ -86,4 +88,3 @@ class RectangularShape extends IndicatorShape {
   @override
   double get width => this.size.width;
 }
-
