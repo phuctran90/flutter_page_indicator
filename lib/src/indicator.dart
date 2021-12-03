@@ -142,12 +142,12 @@ class RectangularPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    var height = this.size!.height;
+  //  var height = this.size!.height;
     var width = this.size!.width;
     var centerWidth = size.width / 2;
-    var startX = centerWidth - totalWidth / 2;
+    var startX = 20;
     for (var i = 0; i < count; i++) {
-      var x = startX + i * (width + padding);
+      var x = startX + i * (14 + padding);
       RRect fullRect = RRect.fromRectAndRadius(
         Rect.fromLTWH(x, 0, 14, 2),
         Radius.circular(1.0),
@@ -157,7 +157,7 @@ class RectangularPainter extends CustomPainter {
       // canvas.drawRect(rect, _circlePaint);
     }
 
-    var selectedX = startX + page * (width + padding);
+    var selectedX = startX + page * (14 + padding);
     RRect fullRect = RRect.fromRectAndRadius(
       Rect.fromLTWH(selectedX, 0, 14, 2),
       Radius.circular(1.0),
